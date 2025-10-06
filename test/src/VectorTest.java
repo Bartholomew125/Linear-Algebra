@@ -33,7 +33,21 @@ public class VectorTest {
 
     @Test
     public void testLength() {
-        
+        Vector v = new Vector(1,2,3);
+        assertEquals(3.7416573868, v.length(), 0.0001);
+        Vector w = new Vector(3,4);
+        assertEquals(5, w.length(), 0);
+    }
+
+    @Test
+    public void testTranspose() {
+        Vector v = new Vector(1,2,3);
+        Matrix transpose = Vector.transpose(v);
+        assertEquals(1, transpose.getNumRows(), 0);
+        assertEquals(v.getSize(), transpose.getNumCols(), 0);
+        for (int i = 0; i < v.getSize(); i++) {
+            assertEquals(v.get(i), transpose.get(0, i), 0);
+        }
     }
 
 
