@@ -29,12 +29,8 @@ public class Vector {
         return Math.sqrt(this.dotProduct(this));
     }
 
-    public static Matrix transpose(Vector v) {
-        Vector[] columns = new Vector[v.getSize()];
-        for (int i = 0; i < v.getSize(); i++) {
-            columns[i] = new Vector(v.get(i));
-        }
-        return new Matrix(columns);
+    public static Matrix asMatrix(Vector v) {
+        return new Matrix(new Vector[]{v.copy()});
     }
 
     // public static Vector project(Vector v, Vector w) {
