@@ -28,6 +28,14 @@ public class Vector {
     public double length() {
         return Math.sqrt(this.dotProduct(this));
     }
+    
+    public static Vector scale(Vector v, double k) {
+        double[] entries = new double[v.getSize()];
+        for (int i = 0; i < v.getSize(); i++) {
+             entries[i] = v.get(i) * k;
+        }
+        return new Vector(entries);
+    }
 
     public static Matrix asMatrix(Vector v) {
         return new Matrix(new Vector[]{v.copy()});
