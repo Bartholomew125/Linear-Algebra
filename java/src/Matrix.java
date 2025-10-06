@@ -109,7 +109,7 @@ public class Matrix {
     public Matrix copy() {
         Vector[] newColumns = new Vector[this.getNumCols()];
         for (int j = 0; j < newColumns.length; j++) {
-            newColumns[j] = this.columns[0].copy();
+            newColumns[j] = this.columns[j].copy();
         }
         return new Matrix(newColumns);
     }
