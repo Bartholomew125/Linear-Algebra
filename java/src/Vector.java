@@ -29,6 +29,15 @@ public class Vector {
         return Math.sqrt(this.dotProduct(this));
     }
 
+    @Override
+    public String toString() {
+        String string = "\n";
+        for (int i = 0; i < this.size; i++) {
+            string = string + this.entries[i] + "\n";
+        }
+        return string;
+    }
+
     public Vector copy() {
         return new Vector(this.entries);
     }
