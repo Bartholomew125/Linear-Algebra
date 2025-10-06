@@ -16,6 +16,17 @@ public class MatrixTest {
     }
 
     @Test
+    public void testGetColumn() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Vector expectedA_1 = new Vector(1, 3);
+        Vector actualA_1 = A.getColumn(0);
+        assertTrue(expectedA_1.equals(actualA_1));
+    }
+
+    @Test
     public void testSize() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
