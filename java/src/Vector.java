@@ -54,5 +54,19 @@ public class Vector {
         return new Vector(this.entries);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        Vector v = (Vector) obj;
+        if (this.getSize() != v.getSize()) {
+            return false;
+        }
+        for (int i = 0; i < this.size; i++) {
+            if (this.get(i) != v.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     
 }
