@@ -68,6 +68,20 @@ public class Matrix {
         }
     }
 
+    public static Matrix transpose(Matrix A) {
+        int newNumRows = A.getNumCols();
+        int newNumCols = A.getNumRows();
+        Vector[] newColumns = new Vector[newNumCols];
+        for (int i = 0; i < A.getNumRows(); i++) {
+            double[] entries = new double[newNumRows];
+            for (int j = 0; j < A.getNumCols(); j++) {
+                entries[j] = A.get(i, j);
+            }
+            newColumns[i] = new Vector(entries);
+        }
+        return new Matrix(newColumns);
+    }
+
     public static Matrix deleteRowAndColumn(Matrix A, int row, int col) {
         int newNumRows = A.getNumRows()-1;
         int newNumCols = A.getNumCols()-1;
