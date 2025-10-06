@@ -112,6 +112,22 @@ public class Matrix {
         return B;
     }
 
+    public static Matrix multiply(Matrix A, Matrix B) {
+        assert A.getNumCols() == B.getNumRows();
+        Matrix AT = Matrix.transpose(A);
+        int newNumRows = A.getNumRows();
+        int newNumCols = B.getNumCols();
+        Vector[] newColumns = new Vector[newNumCols];
+        for (int j = 0; j < newNumCols; j++) {
+            double[] entries = new double[newNumRows];
+            for (int i = 0; i < newNumRows; i++) {
+                entries[i] = AT.getColumn(i).dotProduct(B.getColumn(j));
+            }
+            newColumns[j] = new Vector(entries);
+        }
+        return new Matrix(newColumns);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
