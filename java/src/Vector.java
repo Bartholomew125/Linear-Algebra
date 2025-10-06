@@ -29,5 +29,9 @@ public class Vector {
         return Math.sqrt(this.dotProduct(this));
     }
 
+    public Vector copy() {
+        return new Vector(this.entries);
+    }
+
     
 }
