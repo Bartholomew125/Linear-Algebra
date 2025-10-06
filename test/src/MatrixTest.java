@@ -52,6 +52,19 @@ public class MatrixTest {
     }
 
     @Test
+    public void testTranspose() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Matrix AT = new Matrix(new double[][]{
+            {1, 3},
+            {2, 4}
+        });
+        assertTrue(Matrix.transpose(A).equals(AT));
+    }
+
+    @Test
     public void testDeleteRowAndColumn() {
         Matrix A = new Matrix(new double[][]{
             {1, 2, 3},
