@@ -1,6 +1,6 @@
 public class Vector {
 
-    private double[] entries;
+    private final double[] entries;
     private final int size;
 
     public Vector(double... entries) {
