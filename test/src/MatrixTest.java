@@ -98,6 +98,30 @@ public class MatrixTest {
     }
 
     @Test
+    public void testMultiply() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, 3},
+            {4, 5, 6}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 2},
+            {4, 5},
+            {7, 8}
+        });
+        Matrix C = new Matrix(new double[][]{
+            {30, 36},
+            {66, 81}
+        });
+        assertTrue(Matrix.multiply(A, B).equals(C));
+        C = new Matrix(new double[][]{
+            {9, 12, 15},
+            {24, 33, 42},
+            {39, 54, 69}
+        });
+        assertTrue(Matrix.multiply(B, A).equals(C));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
