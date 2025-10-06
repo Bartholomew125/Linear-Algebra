@@ -88,6 +88,11 @@ public class Matrix {
         return new Matrix(vectors);
     }
 
+    public static Matrix replaceColumn(Matrix A, Vector v, int col) {
+        Matrix B = A.copy();
+        B.columns[col] = v;
+        return B;
+    }
 
     @Override
     public String toString() {
@@ -99,5 +104,13 @@ public class Matrix {
             string = string + "\n";
         }
         return string;
+    }
+
+    public Matrix copy() {
+        Vector[] newColumns = new Vector[this.getNumCols()];
+        for (int j = 0; j < newColumns.length; j++) {
+            newColumns[j] = this.columns[0].copy();
+        }
+        return new Matrix(newColumns);
     }
 }
