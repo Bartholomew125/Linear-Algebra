@@ -135,15 +135,12 @@ public class Matrix {
     @Override
     public boolean equals(Object obj) {
         Matrix M = (Matrix) obj;
-        if (this.getNumCols() != M.getNumCols() ||
-            this.getNumRows() != M.getNumRows()) {
+        if (this.getNumCols() != M.getNumCols()) {
             return false;
         }
-        for (int i = 0; i < this.getNumRows(); i++) {
-            for (int j = 0; j < this.getNumCols(); j++) {
-                if (this.get(i, j) != M.get(i, j)) {
-                    return false;
-                }
+        for (int j = 0; j < this.getNumCols(); j++) {
+            if (!this.getColumn(j).equals(M.getColumn(j))) {
+                return false;
             }
         }
         return true;
