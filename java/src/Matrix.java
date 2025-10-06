@@ -113,4 +113,21 @@ public class Matrix {
         }
         return new Matrix(newColumns);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Matrix M = (Matrix) obj;
+        if (this.getNumCols() != M.getNumCols() ||
+            this.getNumRows() != M.getNumRows()) {
+            return false;
+        }
+        for (int i = 0; i < this.getNumRows(); i++) {
+            for (int j = 0; j < this.getNumCols(); j++) {
+                if (this.get(i, j) != M.get(i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
