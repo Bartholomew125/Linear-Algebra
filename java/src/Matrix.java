@@ -35,6 +35,10 @@ public class Matrix {
         return this.columns[column].get(row);
     }
 
+    public Vector getColumn(int j) {
+        return this.columns[j];
+    }
+
     public int getNumRows() {
         return this.numRows;
     }
