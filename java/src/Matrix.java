@@ -136,6 +136,19 @@ public class Matrix {
         return new Matrix(newColumns);
     }
 
+    public static Matrix swapRows(Matrix A, int a, int b) {
+        assert a < A.getNumRows() && b < A.getNumRows();
+        Vector[] newColumns = new Vector[A.getNumCols()];
+        for (int j = 0; j < A.getNumCols(); j++) {
+            double[] newEntries = A.getColumn(j).getEntries();
+            double temp = newEntries[a];
+            newEntries[a] = newEntries[b];
+            newEntries[b] = temp;
+            newColumns[j] = new Vector(newEntries);
+        }
+        return new Matrix(newColumns);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
