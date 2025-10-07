@@ -41,12 +41,17 @@ public class Vector {
         return new Matrix(new Vector[]{v.copy()});
     }
 
-    // public static Vector project(Vector v, Vector w) {
-    //     Matrix top = Matrix.mult(w, Vector.transpose(w));
-    // }
     public static Vector fromMatrix(Matrix M) {
         assert M.getNumCols() == 1;
         return M.getColumn(0).copy();
+    }
+
+    public static Vector project(Vector v, Vector w) {
+        Matrix Mw = Vector.asMatrix(w);
+        Matrix top = Matrix.multiply(Mw, Matrix.transpose(Mw));
+        Matrix transformation = Matrix.divide(top, w.dotProduct(w));
+        Matrix result = Matrix.multiply(transformation, Vector.asMatrix(v));
+        return Vector.fromMatrix(result);
     }
 
     @Override
