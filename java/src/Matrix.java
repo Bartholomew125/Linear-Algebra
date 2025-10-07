@@ -149,6 +149,16 @@ public class Matrix {
         return new Matrix(newColumns);
     }
 
+    public static Matrix scaleRow(Matrix A, int i, double k) {
+        Vector[] newColumns = new Vector[A.getNumCols()];
+        for (int j = 0; j < A.getNumCols(); j++) {
+            double[] newEntries = A.getColumn(j).getEntries();
+            newEntries[i] = newEntries[i] * k;
+            newColumns[j] = new Vector(newEntries);
+        }
+        return new Matrix(newColumns);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
