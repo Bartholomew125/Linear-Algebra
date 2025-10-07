@@ -36,7 +36,7 @@ public class Matrix {
     }
 
     public Vector getColumn(int j) {
-        return this.columns[j];
+        return this.columns[j].copy();
     }
 
     public int getNumRows() {
