@@ -1,8 +1,8 @@
 public class Matrix {
 
-    private Vector[] columns;
-    private int numRows;
-    private int numCols;
+    private final Vector[] columns;
+    private final int numRows;
+    private final int numCols;
 
     public Matrix(Vector... columnVectors) {
         this.columns = columnVectors;
