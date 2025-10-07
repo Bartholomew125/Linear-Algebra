@@ -122,6 +122,21 @@ public class MatrixTest {
     }
 
     @Test
+    public void testSwapRows() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Matrix Actual = Matrix.swapRows(A, 0, 1);
+        Matrix Expected = new Matrix(new double[][]{
+            {3, 4},
+            {1, 2}
+        });
+        assertTrue(Actual.equals(Expected));
+        assertFalse(A.equals(Actual));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
