@@ -150,6 +150,20 @@ public class MatrixTest {
     }
 
     @Test
+    public void testAddMultipleOfRow() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Matrix Actual = Matrix.addMultipleOfRow(A, 0, 1, 2);
+        Matrix Expected = new Matrix(new double[][]{
+            {7, 10},
+            {3, 4}
+        });
+        assertTrue(Actual.equals(Expected));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
