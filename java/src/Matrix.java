@@ -159,6 +159,17 @@ public class Matrix {
         return new Matrix(newColumns);
     }
 
+    public static Matrix addMultipleOfRow(Matrix A, int a, int b, double k) {
+        assert a < A.getNumRows() && b < A.getNumRows();
+        Vector[] newColumns = new Vector[A.getNumCols()];
+        for (int j = 0; j < A.getNumCols(); j++) {
+            double[] newEntries = A.getColumn(j).getEntries();
+            newEntries[a] = newEntries[a] + newEntries[b] * k;
+            newColumns[j] = new Vector(newEntries);
+        }
+        return new Matrix(newColumns);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
