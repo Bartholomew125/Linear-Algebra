@@ -128,6 +128,14 @@ public class Matrix {
         return new Matrix(newColumns);
     }
 
+    public static Matrix divide(Matrix A, double k) {
+        Vector[] newColumns = new Vector[A.getNumCols()];
+        for (int j = 0; j < newColumns.length; j++) {
+            newColumns[j] = Vector.scale(A.getColumn(j), 1.0/k);
+        }
+        return new Matrix(newColumns);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
