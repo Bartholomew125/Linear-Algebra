@@ -12,6 +12,12 @@ public class VectorTest {
     }
 
     @Test
+    public void testGetEntries() {
+        Vector v = new Vector(1,2,3);
+        assertArrayEquals(new double[]{1,2,3}, v.getEntries(), 0);
+    }
+
+    @Test
     public void testGetSize() {
         Vector v = new Vector();
         assertEquals(0, v.getSize(), 0);
