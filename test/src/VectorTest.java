@@ -38,4 +38,37 @@ public class VectorTest {
         Vector w = new Vector(3,4);
         assertEquals(5, w.length(), 0);
     }
+
+    @Test
+    public void testScale() {
+        Vector v = new Vector(1,2,3);
+        Vector w = new Vector(2,4,6);
+        Vector u = Vector.scale(v, 2);
+        assertTrue(w.equals(u));
+    }
+
+    @Test
+    public void testAsMatrix() {
+        Vector v = new Vector(1,2,3);
+        Matrix V = Vector.asMatrix(v);
+        Matrix M = new Matrix(new double[][]{
+            {1},
+            {2},
+            {3}
+        });
+        assertTrue(V.equals(M));
+    }
+
+    @Test
+    public void testProject() {
+        Vector v = new Vector(1, 1);
+        Vector u = new Vector(1, 0);
+        Vector w = Vector.project(v, u);
+        assertTrue(w.equals(u));
+        v = new Vector(-2, 3);
+        u = new Vector(2,-5);
+        w = Vector.project(v, u);
+        assertEquals(-1.31, w.get(0), 0.01);
+        assertEquals(3.28, w.get(1), 0.01);
+    }
 }
