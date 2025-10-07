@@ -12,6 +12,10 @@ public class Vector {
         return this.entries[i];
     }
 
+    public double[] getEntries() {
+        return this.entries;
+    }
+
     public int getSize() {
         return this.size;
     }
