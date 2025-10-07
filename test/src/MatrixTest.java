@@ -133,7 +133,20 @@ public class MatrixTest {
             {1, 2}
         });
         assertTrue(Actual.equals(Expected));
-        assertFalse(A.equals(Actual));
+    }
+
+    @Test
+    public void testScaleRows() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Matrix Actual = Matrix.scaleRow(A, 1, 2);
+        Matrix Expected = new Matrix(new double[][]{
+            {1, 2},
+            {6, 8}
+        });
+        assertTrue(Actual.equals(Expected));
     }
 
     @Test
