@@ -13,7 +13,7 @@ public class Vector {
     }
 
     public double[] getEntries() {
-        return this.entries;
+        return this.entries.clone();
     }
 
     public int getSize() {
