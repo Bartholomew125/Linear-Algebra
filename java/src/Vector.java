@@ -44,6 +44,10 @@ public class Vector {
     // public static Vector project(Vector v, Vector w) {
     //     Matrix top = Matrix.mult(w, Vector.transpose(w));
     // }
+    public static Vector fromMatrix(Matrix M) {
+        assert M.getNumCols() == 1;
+        return M.getColumn(0).copy();
+    }
 
     @Override
     public String toString() {
