@@ -199,6 +199,86 @@ public class MatrixTest {
     }
 
     @Test
+    public void test1MakeREF() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2},
+            {3, 4}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 2},
+            {0, -2}
+        });
+        Matrix C = Matrix.makeREF(A);
+        assertTrue(B.equals(C));
+    }
+
+    @Test
+    public void test2MakeREF() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 2, 3},
+            {0, -3, -6},
+            {0, 0, 0}
+        });
+        Matrix C = Matrix.makeREF(A);
+        assertTrue(B.equals(C));
+    }
+
+    @Test
+    public void test3MakeREF() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, 3},
+            {0, 1, 4},
+            {0, 0, 1}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 2, 3},
+            {0, 1, 4},
+            {0, 0, 1}
+        });
+        Matrix C = Matrix.makeREF(A);
+        assertTrue(B.equals(C));
+    }
+
+    @Test
+    public void test4MakeREF() {
+        Matrix A = new Matrix(new double[][]{
+            {0, 2, 3},
+            {1, 4, 5},
+            {0, 0, 6}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 4, 5},
+            {0, 2, 3},
+            {0, 0, 6}
+        });
+        Matrix C = Matrix.makeREF(A);
+        assertTrue(B.equals(C));
+    }
+
+    @Test
+    public void test5MakeREF() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, -1, 3},
+            {2, 4, 1, 7},
+            {-1, -2, 2, -1},
+            {3, 6, 0, 9}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {1, 2, -1, 3},
+            {0, 0, 3, 1},
+            {0, 0, 0, 5.0/3.0},
+            {0, 0, 0, 0}
+        });
+        Matrix C = Matrix.makeREF(A);
+        assertTrue(B.equals(C));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
