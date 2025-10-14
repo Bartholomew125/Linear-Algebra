@@ -164,6 +164,21 @@ public class MatrixTest {
     }
 
     @Test
+    public void testSubMatrix() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        });
+        Matrix subA = Matrix.subMatrix(A, 1, 1, 2, 2);
+        Matrix B = new Matrix(new double[][]{
+            {5, 6},
+            {8, 9}
+        });
+        assertTrue(subA.equals(B));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
