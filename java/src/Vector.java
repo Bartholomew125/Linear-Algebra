@@ -78,7 +78,7 @@ public class Vector {
             return false;
         }
         for (int i = 0; i < this.size; i++) {
-            if (this.get(i) != v.get(i)) {
+            if (Math.abs(this.get(i) - v.get(i)) > 0.000000000000000000001) {
                 return false;
             }
         }
