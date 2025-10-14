@@ -204,6 +204,34 @@ public class Matrix {
         return new Matrix(newColumns);
    }
 
+    public static Matrix makeREF(Matrix A) {
+        // Using Gaussian Elimination
+        if (A.getNumRows() <= 1 || A.getNumCols() <= 1) { return A; }
+        // 1 Position a leading entry
+        int i = 0;
+        int j = 0;
+        while (A.get(i, j) == 0) {
+            i++;
+            if (i == A.getNumRows()) { i = 0; j++; }
+            if (j == A.getNumCols()) { return A; }
+        }
+        Matrix B = Matrix.swapRows(A, 0, i);
+
+        // 2 Zero out the leading entry's column
+        double leadingEntry = B.get(0, j);
+        for (i = 1; i < B.getNumRows(); i++) {
+            double multiple = - B.get(i, j)/leadingEntry;
+            B = Matrix.addMultipleOfRow(B, i, 0, multiple);
+        }
+
+        // 3 Repeat until we cannot
+        return Matrix.replaceInside(B, 
+                Matrix.makeREF(
+                    Matrix.subMatrix(B, 1, 1, B.getNumRows()-1, B.getNumCols()-1)
+                    ),
+                1, 1);
+    }
+
     @Override
     public String toString() {
         String string = "\n";
