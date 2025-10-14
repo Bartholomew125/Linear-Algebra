@@ -179,6 +179,26 @@ public class MatrixTest {
     }
 
     @Test
+    public void testReplaceInside() {
+        Matrix A = new Matrix(new double[][]{
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        });
+        Matrix B = new Matrix(new double[][]{
+            {10, 11},
+            {12, 13}
+        });
+        Matrix C = new Matrix(new double[][]{
+            {1, 2, 3},
+            {4, 10, 11},
+            {7, 12, 13}
+        });
+        Matrix A_B = Matrix.replaceInside(A, B, 1, 1);
+        assertTrue(A_B.equals(C));
+    }
+
+    @Test
     public void testToString() {
         Matrix A = new Matrix(new double[][]{
             {1, 2},
