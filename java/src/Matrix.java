@@ -184,6 +184,26 @@ public class Matrix {
         return new Matrix(newColumns);
    }
 
+   public static Matrix replaceInside(Matrix A, Matrix B, int i, int j) {
+        assert i+B.getNumRows() <= A.getNumRows();
+        assert j+B.getNumCols() <= A.getNumCols();
+        Vector[] newColumns = new Vector[A.getNumCols()];
+        for (int l = 0; l < newColumns.length; l++) {
+            double[] entries = new double[A.getNumRows()];
+            for (int k = 0; k < entries.length; k++) {
+                if (k >= i && k <= i+B.getNumRows() &&
+                    l >= j && l <= j+B.getNumCols()) {
+                    entries[k] = B.get(k-i, l-j);
+                }
+                else {
+                    entries[k] = A.get(k, l);
+                }
+            }
+            newColumns[l] = new Vector(entries);
+        }
+        return new Matrix(newColumns);
+   }
+
     @Override
     public String toString() {
         String string = "\n";
