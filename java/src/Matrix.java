@@ -170,6 +170,20 @@ public class Matrix {
         return new Matrix(newColumns);
     }
 
+    public static Matrix subMatrix(Matrix A, int i, int j, int rows, int cols) {
+        assert i+rows <= A.getNumRows();
+        assert j+cols <= A.getNumCols();
+        Vector[] newColumns = new Vector[cols];
+        for (int l = 0; l < cols; l++) {
+            double[] entries = new double[rows];
+            for (int k = 0; k < rows; k++) {
+                entries[k] = A.get(i+k, j+l);
+            }
+            newColumns[l] = new Vector(entries);
+        }
+        return new Matrix(newColumns);
+   }
+
     @Override
     public String toString() {
         String string = "\n";
