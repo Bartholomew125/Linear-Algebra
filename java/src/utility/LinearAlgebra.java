@@ -300,5 +300,14 @@ public final class LinearAlgebra {
         return new SquareMatrix(coordinateVectors);
     }
 
+    public static Vector changeBasis(Vector v, Basis C) {
+        Basis B = v.getBasis() == null ?
+                    new StandardBasis(v.getSize()) :
+                    v.getBasis();
+        SquareMatrix changeOfBasisMatrix = calculateChangeOfBasisMatrix(B, C);
+        Vector intermediate = asVector(multiply(changeOfBasisMatrix, asMatrix(v)));
+        Vector result = new Vector(C, intermediate.getEntries());
+        return result;
+    }
     
 }
