@@ -1,3 +1,4 @@
+package utility;
 import implementations.SquareMatrix;
 import implementations.Vector;
 import utility.LinearAlgebra;
