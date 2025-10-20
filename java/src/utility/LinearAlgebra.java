@@ -292,5 +292,13 @@ public final class LinearAlgebra {
         return new LinearSystem(B,v).solveWithCramersRule();
     }
 
+    public static SquareMatrix calculateChangeOfBasisMatrix(Basis B, Basis C){
+        Vector[] coordinateVectors = new Vector[B.getNumCols()];
+        for (int j = 0; j < B.getNumCols(); j++) {
+            coordinateVectors[j] = coordinateVector(B.getColumn(j), C);
+        }
+        return new SquareMatrix(coordinateVectors);
+    }
+
     
 }
