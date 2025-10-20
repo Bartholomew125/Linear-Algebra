@@ -32,29 +32,29 @@ public final class LinearAlgebra {
     }
 
     public static Vector project(Vector v, Vector w) {
-        GeneralMatrix Mw = LinearAlgebra.asMatrix(w);
-        AbstractMatrix top = LinearAlgebra.multiply(Mw, LinearAlgebra.transpose(Mw));
-        AbstractMatrix transformation = LinearAlgebra.divide(top, LinearAlgebra.dotProduct(w, w));
-        AbstractMatrix result = LinearAlgebra.multiply(transformation, LinearAlgebra.asMatrix(v));
-        return LinearAlgebra.asVector(result);
+        GeneralMatrix Mw = asMatrix(w);
+        AbstractMatrix top = multiply(Mw, transpose(Mw));
+        AbstractMatrix transformation = divide(top, dotProduct(w, w));
+        AbstractMatrix result = multiply(transformation, asMatrix(v));
+        return asVector(result);
     }
 
     public static Vector vectorInBasis(Vector v, Basis B) {
-        SquareMatrix inverseB = LinearAlgebra.inverse(B);
-        GeneralMatrix MV = LinearAlgebra.asMatrix(v);
-        return LinearAlgebra.asVector(LinearAlgebra.multiply(inverseB, MV));
+        SquareMatrix inverseB = inverse(B);
+        GeneralMatrix MV = asMatrix(v);
+        return asVector(multiply(inverseB, MV));
     }
 
     public static AbstractMatrix multiply(AbstractMatrix A, AbstractMatrix B) {
         assert A.getNumCols() == B.getNumRows();
-        AbstractMatrix AT = LinearAlgebra.transpose(A);
+        AbstractMatrix AT = transpose(A);
         int newNumRows = A.getNumRows();
         int newNumCols = B.getNumCols();
         Vector[] newColumns = new Vector[newNumCols];
         for (int j = 0; j < newNumCols; j++) {
             double[] entries = new double[newNumRows];
             for (int i = 0; i < newNumRows; i++) {
-                entries[i] = LinearAlgebra.dotProduct(AT.getColumn(i), B.getColumn(j));
+                entries[i] = dotProduct(AT.getColumn(i), B.getColumn(j));
             }
             newColumns[j] = new Vector(entries);
         }
@@ -62,19 +62,19 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix multiply(SquareMatrix A, SquareMatrix B) {
-        return new SquareMatrix(LinearAlgebra.multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
+        return new SquareMatrix(multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
     }
 
     public static GeneralMatrix multiply(GeneralMatrix A, GeneralMatrix B) {
-        return new GeneralMatrix(LinearAlgebra.multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
+        return new GeneralMatrix(multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
     }
 
     public static GeneralMatrix multiply(SquareMatrix A, GeneralMatrix B) {
-        return new GeneralMatrix(LinearAlgebra.multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
+        return new GeneralMatrix(multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
     }
 
     public static GeneralMatrix multiply(GeneralMatrix A, SquareMatrix B) {
-        return new GeneralMatrix(LinearAlgebra.multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
+        return new GeneralMatrix(multiply((AbstractMatrix) A, (AbstractMatrix) B).getColumns());
     }
 
     public static AbstractMatrix transpose(AbstractMatrix A) {
@@ -99,8 +99,8 @@ public final class LinearAlgebra {
             double sum = 0;
             int j = 0;
             for (int i = 0; i < A.getNumRows(); i++){
-                SquareMatrix M = LinearAlgebra.deleteRowAndColumn(A,i,j);
-                double detM = LinearAlgebra.determinate(M);
+                SquareMatrix M = deleteRowAndColumn(A,i,j);
+                double detM = determinate(M);
                 double C = (i+j)%2==0 ? detM : -detM;
                 sum = sum + A.get(i,j)*C;
             }
@@ -132,11 +132,11 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix deleteRowAndColumn(SquareMatrix A, int row, int col) {
-        return new SquareMatrix(LinearAlgebra.deleteRowAndColumn((AbstractMatrix) A, row, col).getColumns());
+        return new SquareMatrix(deleteRowAndColumn((AbstractMatrix) A, row, col).getColumns());
     }
 
     public static GeneralMatrix deleteRowAndColumn(GeneralMatrix A, int row, int col) {
-        return new GeneralMatrix(LinearAlgebra.deleteRowAndColumn((AbstractMatrix) A, row, col).getColumns());
+        return new GeneralMatrix(deleteRowAndColumn((AbstractMatrix) A, row, col).getColumns());
     }
 
     public static AbstractMatrix replaceColumn(AbstractMatrix A, Vector v, int col) {
@@ -146,7 +146,7 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix replaceColumn(SquareMatrix A, Vector v, int col) {
-        return new SquareMatrix(LinearAlgebra.replaceColumn((AbstractMatrix) A, v, col).getColumns());
+        return new SquareMatrix(replaceColumn((AbstractMatrix) A, v, col).getColumns());
     }
 
 
@@ -172,11 +172,11 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix swapRows(SquareMatrix A, int a, int b) {
-        return new SquareMatrix(LinearAlgebra.swapRows((AbstractMatrix) A, a, b).getColumns());
+        return new SquareMatrix(swapRows((AbstractMatrix) A, a, b).getColumns());
     }
 
     public static GeneralMatrix swapRows(GeneralMatrix A, int a, int b) {
-        return new GeneralMatrix(LinearAlgebra.swapRows((AbstractMatrix) A, a, b).getColumns());
+        return new GeneralMatrix(swapRows((AbstractMatrix) A, a, b).getColumns());
     }
 
     public static AbstractMatrix scaleRow(AbstractMatrix A, int i, double k) {
@@ -190,11 +190,11 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix scaleRow(SquareMatrix A, int i, int k) {
-        return new SquareMatrix(LinearAlgebra.scaleRow((AbstractMatrix) A, i, k).getColumns());
+        return new SquareMatrix(scaleRow((AbstractMatrix) A, i, k).getColumns());
     }
 
     public static GeneralMatrix scaleRow(GeneralMatrix A, int i, int k) {
-        return new GeneralMatrix(LinearAlgebra.scaleRow((AbstractMatrix) A, i, k).getColumns());
+        return new GeneralMatrix(scaleRow((AbstractMatrix) A, i, k).getColumns());
     }
 
     public static AbstractMatrix addMultipleOfRow(AbstractMatrix A, int a, int b, double k) {
@@ -209,11 +209,11 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix addMultipleOfRow(SquareMatrix A, int a, int b, double k) {
-        return new SquareMatrix(LinearAlgebra.addMultipleOfRow((AbstractMatrix) A, a, b, k).getColumns());
+        return new SquareMatrix(addMultipleOfRow((AbstractMatrix) A, a, b, k).getColumns());
     }
 
     public static GeneralMatrix addMultipleOfRow(GeneralMatrix A, int a, int b, double k) {
-        return new GeneralMatrix(LinearAlgebra.addMultipleOfRow((AbstractMatrix) A, a, b, k).getColumns());
+        return new GeneralMatrix(addMultipleOfRow((AbstractMatrix) A, a, b, k).getColumns());
     }
 
     public static SquareMatrix subMatrix(SquareMatrix A, int i, int j, int rows, int cols) {
@@ -251,7 +251,7 @@ public final class LinearAlgebra {
    }
 
    public static SquareMatrix replaceInside(SquareMatrix A, SquareMatrix B, int i, int j) {
-       return new SquareMatrix(LinearAlgebra.replaceInside((AbstractMatrix) A, (AbstractMatrix) B, i, j).getColumns());
+       return new SquareMatrix(replaceInside((AbstractMatrix) A, (AbstractMatrix) B, i, j).getColumns());
    }
 
     public static SquareMatrix makeREF(SquareMatrix A) {
@@ -265,19 +265,19 @@ public final class LinearAlgebra {
             if (i == A.getNumRows()) { i = 0; j++; }
             if (j == A.getNumCols()) { return A; }
         }
-        SquareMatrix B = LinearAlgebra.swapRows(A, 0, i);
+        SquareMatrix B = swapRows(A, 0, i);
 
         // 2 Zero out the leading entry's column
         double leadingEntry = B.get(0, j);
         for (i = 1; i < B.getNumRows(); i++) {
             double multiple = - B.get(i, j)/leadingEntry;
-            B = LinearAlgebra.addMultipleOfRow(B, i, 0, multiple);
+            B = addMultipleOfRow(B, i, 0, multiple);
         }
 
         // 3 Repeat until we cannot
-        return LinearAlgebra.replaceInside(B, 
-                LinearAlgebra.makeREF(
-                    LinearAlgebra.subMatrix(B, 1, 1, B.getNumRows()-1, B.getNumCols()-1)
+        return replaceInside(B, 
+                makeREF(
+                    subMatrix(B, 1, 1, B.getNumRows()-1, B.getNumCols()-1)
                     ),
                 1, 1);
     }
