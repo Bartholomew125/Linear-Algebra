@@ -3,6 +3,7 @@ import implementations.Vector;
 import implementations.GeneralMatrix;
 import implementations.Basis;
 import implementations.SquareMatrix;
+import implementations.StandardBasis;
 import implementations.IdentityMatrix;
 import implementations.AugmentedMatrix;
 import abstracts.AbstractMatrix;
@@ -287,6 +288,9 @@ public final class LinearAlgebra {
         return M.getRightMatrix();
     }
 
+    public static Vector coordinateVector(Vector v, Basis B) {
+        return new LinearSystem(B,v).solveWithCramersRule();
+    }
 
     
 }
