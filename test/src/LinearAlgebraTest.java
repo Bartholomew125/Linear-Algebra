@@ -2,6 +2,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import abstracts.AbstractMatrix;
+import implementations.Basis;
 import implementations.SquareMatrix;
 import implementations.Vector;
 import utility.LinearAlgebra;
@@ -237,5 +238,17 @@ public class LinearAlgebraTest {
         });
         SquareMatrix C = LinearAlgebra.makeREF(A);
         assertTrue(B.equals(C));
+    }
+
+    @Test
+    public void testChangeBasis() {
+        Vector v1 = new Vector(1, 1);
+        Basis b = new Basis(new double[][]{
+            {0,-1},
+            {1,0}
+        });
+        Vector v2 = new Vector(1, -1);
+        Vector v1_b = LinearAlgebra.changeBasis(v1, b);
+        assertTrue(v1_b.equals(v2));
     }
 }
