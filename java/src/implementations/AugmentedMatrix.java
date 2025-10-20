@@ -1,0 +1,41 @@
+package implementations;
+
+import abstracts.AbstractMatrix;
+
+public class AugmentedMatrix extends AbstractMatrix {
+
+    private final SquareMatrix leftMatrix;
+    private final SquareMatrix rightMatrix;
+    private final int numRows;
+    private final int numCols;
+
+    public AugmentedMatrix(SquareMatrix A, SquareMatrix B) {
+        assert A.getNumRows() == B.getNumRows();
+        this.leftMatrix = A;
+        this.rightMatrix = B;
+        this.numCols = A.getNumCols() + B.getNumCols();
+        this.numRows = A.getNumRows();
+    }
+
+    @Override
+    public double get(int row, int column) {
+        return column < this.leftMatrix.getNumCols() ?
+            this.leftMatrix.get(row, column) : 
+            this.rightMatrix.get(row, column);
+    }
+
+    @Override
+    public Vector getColumn(int j) {
+        return j < this.leftMatrix.getNumCols() ?
+            this.leftMatrix.getColumn(j) :
+            this.rightMatrix.getColumn(j);
+    }
+
+    public SquareMatrix getLeftMatrix() {
+        return this.leftMatrix;
+    }
+
+    public SquareMatrix getRightMatrix() {
+        return this.rightMatrix;
+    }
+}
