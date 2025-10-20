@@ -5,10 +5,18 @@ public class Vector {
 
     private final double[] entries;
     private final int size;
+    private Basis basis;
 
     public Vector(double... entries) {
         this.entries = entries;
         this.size = entries.length;
+        this.basis = null;
+    }
+
+    public Vector(Basis B, double... entries) {
+        this.entries = entries;
+        this.size = entries.length;
+        this.basis = B;
     }
 
     public double get(int i) {
@@ -21,6 +29,10 @@ public class Vector {
 
     public int getSize() {
         return this.size;
+    }
+
+    public Basis getBasis() {
+        return this.basis;
     }
 
     public double length() {
