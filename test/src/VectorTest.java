@@ -1,6 +1,11 @@
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import implementations.GeneralMatrix;
+import implementations.SquareMatrix;
+import implementations.Vector;
+import utility.LinearAlgebra;
+
 public class VectorTest {
 
     @Test
@@ -31,10 +36,10 @@ public class VectorTest {
     public void testDotProduct() {
         Vector v = new Vector(1,2,3);
         Vector w = new Vector(4,5,6);
-        assertEquals(1*4+2*5+3*6, v.dotProduct(w), 0);
-        assertEquals(1*4+2*5+3*6, w.dotProduct(v), 0);
-        assertEquals(1*1+2*2+3*3, v.dotProduct(v), 0);
-        assertEquals(4*4+5*5+6*6, w.dotProduct(w), 0);
+        assertEquals(1*4+2*5+3*6, LinearAlgebra.dotProduct(v,w), 0);
+        assertEquals(1*4+2*5+3*6, LinearAlgebra.dotProduct(w,v), 0);
+        assertEquals(1*1+2*2+3*3, LinearAlgebra.dotProduct(v,v), 0);
+        assertEquals(4*4+5*5+6*6, LinearAlgebra.dotProduct(w,w), 0);
     }
 
     @Test
@@ -56,8 +61,8 @@ public class VectorTest {
     @Test
     public void testAsMatrix() {
         Vector v = new Vector(1,2,3);
-        Matrix V = Vector.asMatrix(v);
-        Matrix M = new Matrix(new double[][]{
+        GeneralMatrix V = LinearAlgebra.asMatrix(v);
+        GeneralMatrix M = new GeneralMatrix(new double[][]{
             {1},
             {2},
             {3}
@@ -69,11 +74,11 @@ public class VectorTest {
     public void testProject() {
         Vector v = new Vector(1, 1);
         Vector u = new Vector(1, 0);
-        Vector w = Vector.project(v, u);
+        Vector w = LinearAlgebra.project(v, u);
         assertTrue(w.equals(u));
         v = new Vector(-2, 3);
         u = new Vector(2,-5);
-        w = Vector.project(v, u);
+        w = LinearAlgebra.project(v, u);
         assertEquals(-1.31, w.get(0), 0.01);
         assertEquals(3.28, w.get(1), 0.01);
     }
