@@ -49,7 +49,7 @@ public class Vector {
 
     @Override
     public String toString() {
-        String string = "\n";
+        String string = "";
         for (int i = 0; i < this.size; i++) {
             string = string + this.entries[i] + "\n";
         }
