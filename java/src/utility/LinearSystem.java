@@ -13,6 +13,15 @@ public class LinearSystem {
         this.b = b;
     }
 
+    public LinearSolution solve() {
+        if (this.A.determinate() == 0) {
+            return new LinearSolution(new Vector(1,2), true);
+        }
+        else {
+            return new LinearSolution(this.solveWithCramersRule());
+        }
+    }
+
     public Vector solveWithCramersRule() {
         double[] entries = new double[this.b.getSize()];
         double detA = this.A.determinate();
