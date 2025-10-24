@@ -256,7 +256,7 @@ public final class LinearAlgebra {
 
     public static SquareMatrix makeREF(SquareMatrix A) {
         // Using Gaussian Elimination
-        if (A.getNumRows() <= 1 || A.getNumCols() <= 1) { return A; }
+        if (A.getNumRows() <= 1) { return A; }
         // 1 Position a leading entry
         int i = 0;
         int j = 0;
