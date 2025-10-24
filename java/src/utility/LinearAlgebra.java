@@ -6,6 +6,10 @@ import implementations.SquareMatrix;
 import implementations.StandardBasis;
 import implementations.IdentityMatrix;
 import implementations.AugmentedMatrix;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import abstracts.AbstractMatrix;
 
 /**
