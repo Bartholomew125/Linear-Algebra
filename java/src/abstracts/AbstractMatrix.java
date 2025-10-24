@@ -11,10 +11,10 @@ public class AbstractMatrix implements Matrix {
     private final int numRows;
     private final int numCols;
 
-    public AbstractMatrix() {
+    public AbstractMatrix(int numRows, int numCols) {
         this.columns = new Vector[0];
-        this.numRows = 0;
-        this.numCols = 0;
+        this.numRows = numRows;
+        this.numCols = numCols;
     }
 
     public AbstractMatrix(Vector... columns) {
