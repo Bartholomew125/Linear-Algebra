@@ -282,6 +282,74 @@ public final class LinearAlgebra {
                 1, 1);
     }
 
+    public static AugmentedMatrix makeREF(AugmentedMatrix A) {
+        if (A.getNumRows() <= 1) { return A; }
+        // 1 Position a leading entry
+        int i = 0;
+        int j = 0;
+        while (A.getLeftMatrix().get(i, j) == 0) {
+            i++;
+            if (i == A.getLeftMatrix().getNumRows()) { i = 0; j++; }
+            if (j == A.getLeftMatrix().getNumCols()) { return A; }
+        }
+        SquareMatrix A1 = swapRows(A.getLeftMatrix(), 0, i);
+        SquareMatrix A2 = swapRows(A.getRightMatrix(), 0, i);
+
+        // 2 Zero out the leading entry's column
+        double leadingEntry = A1.get(0, j);
+        for (i = 1; i < A1.getNumRows(); i++) {
+            double multiple = - A1.get(i, j)/leadingEntry;
+            A1 = addMultipleOfRow(A1, i, 0, multiple);
+            A2 = addMultipleOfRow(A2, i, 0, multiple);
+        }
+
+        // 3 Repeat until we cannot
+        SquareMatrix subA1 = subMatrix(A1, 1, 1, A1.getNumRows()-1, A1.getNumCols()-1);
+        SquareMatrix subA2 = subMatrix(A2, 1, 1, A2.getNumRows()-1, A2.getNumCols()-1);
+        AugmentedMatrix subAREF = makeREF(new AugmentedMatrix(subA1, subA2));
+        A1 = replaceInside(A1, subAREF.getLeftMatrix(), 1, 1);
+        A2 = replaceInside(A2, subAREF.getRightMatrix(), 1, 1);
+
+        return new AugmentedMatrix(A1, A2);
+    }
+
+    public static AugmentedMatrix makeReducedREF(AugmentedMatrix A) {
+        AugmentedMatrix B = makeREF(A);
+        SquareMatrix B1 = B.getLeftMatrix();
+        SquareMatrix B2 = B.getRightMatrix();
+        // Locate leading entries
+        ArrayList<int[]> les = new ArrayList<>();
+        for (int i = 0; i < B1.getNumRows(); i++) {
+            for (int j = 0; j < B1.getNumCols(); j++) {
+                if (B1.get(i,j) != 0) {
+                    les.add(new int[]{i,j});
+                    j = B1.getNumCols();
+                }
+            }
+        }
+
+        // Make leading entries equal 1
+        for (int[] le : les) {
+            double k = 1.0/B1.get(le[0], le[1]);
+            B1 = scaleRow(B1, le[0], k);
+            B2 = scaleRow(B2, le[0], k);
+        }
+
+        // Zero out leading entries colum
+        for (int[] le : les) {
+            for (int i = 0; i < B1.getNumRows(); i++) {
+                if (i == le[0]) { i++; }
+                else {
+                    double k = - B1.get(i, le[1]);
+                    B1 = addMultipleOfRow(B1, i, le[0], k);
+                    B2 = addMultipleOfRow(B2, i, le[0], k);
+               }
+            }
+        }
+
+        return new AugmentedMatrix(B1, B2);
+    }
+
     public static SquareMatrix inverse(SquareMatrix A) {
         IdentityMatrix id = new IdentityMatrix(A.getNumRows());
         AugmentedMatrix M = new AugmentedMatrix(A, id);
