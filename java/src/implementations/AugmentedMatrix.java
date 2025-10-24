@@ -38,4 +38,19 @@ public class AugmentedMatrix extends AbstractMatrix {
     public SquareMatrix getRightMatrix() {
         return this.rightMatrix;
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < this.getNumRows(); i++) {
+            for (int j = 0; j < this.getNumCols(); j++) {
+                if (j == this.getNumCols()/2) {
+                    s += "| ";
+                }
+                s += this.get(i, j) + " ";
+            }
+            s += "\n";
+        }
+        return s;
+    }
 }
