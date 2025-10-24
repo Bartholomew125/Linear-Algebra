@@ -189,11 +189,11 @@ public final class LinearAlgebra {
         return new AbstractMatrix(newColumns);
     }
 
-    public static SquareMatrix scaleRow(SquareMatrix A, int i, int k) {
+    public static SquareMatrix scaleRow(SquareMatrix A, int i, double k) {
         return new SquareMatrix(scaleRow((AbstractMatrix) A, i, k).getColumns());
     }
 
-    public static GeneralMatrix scaleRow(GeneralMatrix A, int i, int k) {
+    public static GeneralMatrix scaleRow(GeneralMatrix A, int i, double k) {
         return new GeneralMatrix(scaleRow((AbstractMatrix) A, i, k).getColumns());
     }
 
