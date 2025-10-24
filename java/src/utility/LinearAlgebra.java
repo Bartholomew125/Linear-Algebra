@@ -285,6 +285,7 @@ public final class LinearAlgebra {
     public static SquareMatrix inverse(SquareMatrix A) {
         IdentityMatrix id = new IdentityMatrix(A.getNumRows());
         AugmentedMatrix M = new AugmentedMatrix(A, id);
+        M = LinearAlgebra.makeReducedREF(M);
         return M.getRightMatrix();
     }
 
