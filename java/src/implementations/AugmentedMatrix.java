@@ -6,22 +6,19 @@ public class AugmentedMatrix extends AbstractMatrix {
 
     private final SquareMatrix leftMatrix;
     private final SquareMatrix rightMatrix;
-    private final int numRows;
-    private final int numCols;
 
     public AugmentedMatrix(SquareMatrix A, SquareMatrix B) {
+        super(A.getNumRows(), A.getNumCols() + B.getNumCols());
         assert A.getNumRows() == B.getNumRows();
         this.leftMatrix = A;
         this.rightMatrix = B;
-        this.numCols = A.getNumCols() + B.getNumCols();
-        this.numRows = A.getNumRows();
     }
 
     @Override
     public double get(int row, int column) {
         return column < this.leftMatrix.getNumCols() ?
             this.leftMatrix.get(row, column) : 
-            this.rightMatrix.get(row, column);
+            this.rightMatrix.get(row, column-this.leftMatrix.getNumCols());
     }
 
     @Override
