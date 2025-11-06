@@ -15,7 +15,8 @@ public class LinearSystem {
 
     public LinearSolution solve() {
         if (this.A.determinate() == 0) {
-            return new LinearSolution(new Vector(1,2), true);
+            System.out.println("NOT IMPLEMENTED. There are infinitely many solution");
+            return new LinearSolution(this.b, true);
         }
         else {
             return new LinearSolution(this.solveWithCramersRule());
