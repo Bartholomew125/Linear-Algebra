@@ -11,12 +11,19 @@ public class AbstractMatrix implements Matrix {
     private final int numRows;
     private final int numCols;
 
+    /**
+     * Instanciate a new AbstractMatrix without any columns, with a set number
+     * of rows and number of columns.
+     */
     public AbstractMatrix(int numRows, int numCols) {
         this.columns = new Vector[0];
         this.numRows = numRows;
         this.numCols = numCols;
     }
 
+    /**
+     * Instanciate a new AbstractMatrix with the given column vectors.
+     */
     public AbstractMatrix(Vector... columns) {
         this.columns = columns;
         this.numRows = columns[0].getSize();
@@ -24,8 +31,16 @@ public class AbstractMatrix implements Matrix {
     }
 
     /**
-     * ({{1,2,3},{4,5,6},{7,8,9}}) 
-     * Should return a matrix, which when printed looks like this.
+     * Instanciate a new AbstractMatrix with the given entries in the following
+     * form:
+     * {
+     *     {1,2,3},
+     *     {4,5,6},
+     *     {7,8,9}
+     * } 
+     * This is equivalent to the AugmentedMatrix with column vectors:
+     * (1,4,7), (2,5,8),  (3,6,9)
+     * So when printed they both look like this:
      * 1 2 3
      * 4 5 6
      * 7 8 9
