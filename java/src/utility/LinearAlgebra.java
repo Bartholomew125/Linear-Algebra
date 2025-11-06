@@ -317,6 +317,39 @@ public final class LinearAlgebra {
         return new AugmentedMatrix(A1, A2);
     }
 
+    public static SquareMatrix makeReducedREF(SquareMatrix A) {
+        SquareMatrix B = makeREF(A);
+        // Locate leading entries
+        ArrayList<int[]> les = new ArrayList<>();
+        for (int i = 0; i < B.getNumRows(); i++) {
+            for (int j = 0; j < B.getNumCols(); j++) {
+                if (B.get(i,j) != 0) {
+                    les.add(new int[]{i,j});
+                    j = B.getNumCols();
+                }
+            }
+        }
+
+        // Make leading entries equal 1
+        for (int[] le : les) {
+            double k = 1.0/B.get(le[0], le[1]);
+            B = scaleRow(B, le[0], k);
+        }
+
+        // Zero out leading entries colum
+        for (int[] le : les) {
+            for (int i = 0; i < B.getNumRows(); i++) {
+                if (i == le[0]) { i++; }
+                else {
+                    double k = - B.get(i, le[1]);
+                    B = addMultipleOfRow(B, i, le[0], k);
+               }
+            }
+        }
+
+        return B;
+    }
+
     public static AugmentedMatrix makeReducedREF(AugmentedMatrix A) {
         AugmentedMatrix B = makeREF(A);
         SquareMatrix B1 = B.getLeftMatrix();
@@ -355,6 +388,9 @@ public final class LinearAlgebra {
     }
 
     public static SquareMatrix inverse(SquareMatrix A) {
+        if (A.determinate() == 0) {
+            return null;
+        }
         IdentityMatrix id = new IdentityMatrix(A.getNumRows());
         AugmentedMatrix M = new AugmentedMatrix(A, id);
         M = LinearAlgebra.makeReducedREF(M);
